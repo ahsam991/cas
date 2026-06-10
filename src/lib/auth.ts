@@ -1,5 +1,5 @@
 import type { NextAuthOptions } from "next-auth";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { ObjectId } from "mongodb";
 import GoogleProvider from "next-auth/providers/google";
 
