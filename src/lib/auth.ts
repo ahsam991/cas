@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
               name: user.name ?? null,
               email: user.email ?? null,
               image: user.image ?? null,
-              emailVerified: user.emailVerified ?? null,
+              emailVerified: (user as any).emailVerified ?? null,
               role: "user",
               authMeta: {
                 provider: account?.provider ?? "google",

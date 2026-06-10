@@ -1,4 +1,28 @@
-"  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Download, Sparkles, Timer, CheckCircle2, ListChecks } from "lucide-react";
+
+import { useMocksySession } from "@/hooks/use-mocksy-session";
+import {
+  createMockSession,
+  MOCKSY_SESSION_KEY,
+  questionsForSession,
+} from "@/lib/mocksy/session";
+import { notifyMocksySessionUpdated } from "@/lib/mocksy/session-events";
+import { buildMockResults } from "@/lib/mocksy/results";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+function randomSeed() {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
   return `${Date.now()}_${Math.random().toString(16).slice(2)}`;
 }
 
@@ -20,8 +44,12 @@ export default function ResultsPage() {
 
   const breakdown = React.useMemo(() => {
     if (!model) return null;
-    const by = { "pre-cas": [] as number[], ukvi: [] as number[], general: [] as number[] };
-    for (const q of model.questionResults) by[q.category].push(q.score);
+    const by: Record<string, number[]> = { "pre-cas": [], ukvi: [], general: [] };
+    for (const q of model.questionResults) {
+      if (by[q.category]) {
+        by[q.category].push(q.score);
+      }
+    }
     const avg = (arr: number[]) => (arr.length ? Math.round(arr.reduce((s, n) => s + n, 0) / arr.length) : 0);
     return {
       preCasAvg: avg(by["pre-cas"]),
