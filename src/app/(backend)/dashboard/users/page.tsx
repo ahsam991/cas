@@ -13,7 +13,7 @@ import { getAdminDashboardSummary } from "@/lib/admin-data";
 import { QUESTION_BANK } from "@/lib/mocksy/questions";
 
 export default async function UsersPage() {
-  const { totalUsers, totalUsersWithDetails } = await getAdminDashboardSummary();
+  const { totalUsers, totalUsersWithDetails } = await getAdminDashboardSummary(QUESTION_BANK.length);
   const users = totalUsersWithDetails;
 
   return (

@@ -85,35 +85,6 @@ function buildQuestionTitle(questionText: string, difficulty: string) {
 }
 
 export async function getAdminDashboardSummary() {
-  if (!process.env.MONGODB_URI) {
-    return {
-      totalUsers: 4,
-      activeSessions: 2,
-      totalQuestions: 15,
-      totalUsersWithDetails: [
-        {
-          id: "demo-user-1",
-          name: "Demo User",
-          email: "demo@mocksy.app",
-          role: "user",
-          createdAt: "10 Jun 2026",
-          lastSignInAt: "10 Jun 2026",
-          emailVerified: "10 Jun 2026",
-          avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Demo"
-        }
-      ],
-      recentActivities: [
-        {
-          id: "act-1",
-          title: "Demo mode active",
-          actor: "System",
-          timeLabel: "Just now",
-          kind: "user"
-        }
-      ],
-    } satisfies AdminDashboardSummary;
-  }
-
   const client = await getMongoClientPromise();
   const db = client.db();
 

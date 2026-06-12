@@ -9,12 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@auth/mongodb-adapter": "^3.11.2",
+    "@next-auth/mongodb-adapter": "^1.1.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
-    "lightningcss": "^1.32.0",
-    "lightningcss-darwin-arm64": "^1.32.0",
     "lucide": "^1.3.0",
     "lucide-react": "^1.14.0",
     "mongodb": "^7.2.0",

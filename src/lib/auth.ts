@@ -1,5 +1,5 @@
 import type { NextAuthOptions } from "next-auth";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { ObjectId } from "mongodb";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
               name: user.name ?? null,
               email: user.email ?? null,
               image: user.image ?? null,
-              emailVerified: (user as any).emailVerified ?? null,
+              emailVerified: user.emailVerified ?? null,
               role: "user",
               authMeta: {
                 provider: account?.provider ?? "google",
